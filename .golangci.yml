@@ -46,6 +46,9 @@ linters:
     - usestdlibvars
     - errcheck
     - err113
+    - forcetypeassert
+    - gosec
+    - noctx
     
   settings:
     depguard:
