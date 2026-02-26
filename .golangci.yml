@@ -42,7 +42,11 @@ linters:
     - nlreturn
     - varnamelen
     - revive
-
+    - wsl_v5
+    - usestdlibvars
+    - errcheck
+    - err113
+    
   settings:
     depguard:
       rules:
