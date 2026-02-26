@@ -40,6 +40,7 @@ func (f *DigitalProductFactory) CreateProduct(name string, price float64, extra 
 // DigitalProduct represents a downloadable item like an e-book or software
 type DigitalProduct struct {
 	baseProduct
+
 	downloadLink string
 }
 

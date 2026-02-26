@@ -49,6 +49,7 @@ linters:
     - forcetypeassert
     - gosec
     - noctx
+    - noinlineerr
     
   settings:
     depguard:
