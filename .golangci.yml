@@ -50,7 +50,7 @@ linters:
     - gosec
     - noctx
     - noinlineerr
-    
+
   settings:
     depguard:
       rules:

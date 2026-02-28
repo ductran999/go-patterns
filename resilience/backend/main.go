@@ -71,6 +71,12 @@ func main() {
 		})
 	})
 
+	router.POST("/v1/completions", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": "service got internal error",
+		})
+	})
+
 	router.GET("/v1/auth", func(ctx *gin.Context) {
 		apiKey := ctx.GetHeader("X-Api-Key")
 

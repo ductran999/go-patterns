@@ -1,6 +1,9 @@
 package main
 
 import (
+	"io"
+	"log"
+	"log/slog"
 	"patterns/resilience/backend/pkg/request"
 	"sync"
 
@@ -13,7 +16,20 @@ func main() {
 
 	for range 20 {
 		wg.Go(func() {
-			request.DoInference(c)
+			resp, err := request.DoInference(c)
+			if err != nil {
+				slog.Error("do inference request failed", "error_detail", err.Error())
+				return
+			}
+			defer resp.Body.Close()
+
+			bodyBytes, err := io.ReadAll(resp.Body)
+			if err != nil {
+				slog.Error("failed to read body", "error", err)
+				return
+			}
+
+			log.Println(string(bodyBytes))
 		})
 	}
 
