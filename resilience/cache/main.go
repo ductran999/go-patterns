@@ -34,19 +34,17 @@ func callBackend() ([]byte, error) {
 
 func main() {
 	wg := sync.WaitGroup{}
-
 	for i := range 20 {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			resp, err := callBackend()
-			if err != nil {
-				slog.Error(err.Error())
-			} else {
-				slog.Info(string(resp), "goroutine", i)
-			}
-		}()
-
+		wg.Go(
+			func() {
+				resp, err := callBackend()
+				if err != nil {
+					slog.Error(err.Error())
+				} else {
+					slog.Info(string(resp), "goroutine", i)
+				}
+			},
+		)
 		time.Sleep(time.Second * 1)
 	}
 

@@ -6,6 +6,7 @@ import (
 	"log"
 	"log/slog"
 	"net/http"
+	"sync"
 	"time"
 
 	"github.com/sony/gobreaker"
@@ -30,13 +31,13 @@ func init() {
 
 func callPythonBackend() ([]byte, error) {
 	body, err := cb.Execute(func() (any, error) {
-		resp, err := http.Get("http://localhost:8000/v1/chat/completions")
+		resp, err := http.Post("http://localhost:8080/v1/chat/completions", "", nil)
 		if err != nil {
 			return nil, err
 		}
 		defer resp.Body.Close()
 
-		if resp.StatusCode != 200 {
+		if resp.StatusCode != http.StatusOK {
 			return nil, fmt.Errorf("server error: %d", resp.StatusCode)
 		}
 
@@ -50,12 +51,16 @@ func callPythonBackend() ([]byte, error) {
 }
 
 func main() {
+	wg := new(sync.WaitGroup)
 	for i := range 20 {
-		log.Println(i, "---> call api")
-		_, err := callPythonBackend()
-		if err != nil {
-			slog.Error(err.Error())
-		}
-		time.Sleep(time.Second * time.Duration(i))
+		wg.Go(func() {
+			log.Println(i, "---> call api")
+			_, err := callPythonBackend()
+			if err != nil {
+				slog.Error(err.Error())
+			}
+		})
 	}
+
+	wg.Wait()
 }

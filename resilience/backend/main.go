@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"log/slog"
 	"math/rand"
+	"net/http"
+	"patterns/resilience/backend/middleware"
+	"patterns/resilience/backend/pkg/ratelimiter"
 	"sync/atomic"
 	"time"
 
@@ -38,11 +41,33 @@ func simulateQueryDB(apiKey string) (string, error) {
 
 func main() {
 	allowCache = time.Now().Add(15 * time.Second)
+	ratelimiter := ratelimiter.NewSimpleRatelimiter()
 
 	router := gin.Default()
-	router.GET("/v1/chat/completions", func(c *gin.Context) {
-		c.JSON(500, gin.H{
-			"message": "model is down",
+	router.Use(middleware.RateLimit(ratelimiter))
+	router.POST("/v1/chat/completions", func(c *gin.Context) {
+		time.Sleep(500 * time.Millisecond)
+
+		c.JSON(http.StatusOK, gin.H{
+			"id":      "chatcmpl-mock-123",
+			"object":  "chat.completion",
+			"created": time.Now().Unix(),
+			"model":   "gpt-3.5-turbo-mock",
+			"choices": []gin.H{
+				{
+					"index": 0,
+					"message": gin.H{
+						"role":    "assistant",
+						"content": "Hello how can I help you today!",
+					},
+					"finish_reason": "stop",
+				},
+			},
+			"usage": gin.H{
+				"prompt_tokens":     10,
+				"completion_tokens": 20,
+				"total_tokens":      30,
+			},
 		})
 	})
 
