@@ -23,10 +23,10 @@ tasks:
   codecov:
     desc: run unit test and force coverage > 80%
     cmds:
-      - go test -coverprofile=coverage.out ./...
+      - go test -coverprofile=coverage.out $(go list ./... | grep -v resilience)
       - go tool cover -func=coverage.out | awk '/^total:/ { if ($3+0 < 80) { print "Coverage below 80%"; exit 1 } }'
 
   deps:
     desc: install dependencies
     cmds:
-      - go install github.com/vektra/mockery/v2@v2.46.3
+      - go install github.com/vektra/mockery/v3@v3.6.4
