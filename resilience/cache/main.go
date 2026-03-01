@@ -45,7 +45,11 @@ func main() {
 				}
 			},
 		)
-		time.Sleep(time.Second * 1)
+
+		// Burst 5 request to test singleflight request
+		if i > 5 {
+			time.Sleep(time.Second * 1)
+		}
 	}
 
 	wg.Wait()

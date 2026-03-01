@@ -1,47 +1,18 @@
 package server
 
 import (
-	"errors"
-	"fmt"
-	"log/slog"
-	"math/rand"
 	"net/http"
 	"patterns/resilience/backend/middleware"
 	"patterns/resilience/backend/pkg/ratelimiter"
-	"sync/atomic"
+	"patterns/resilience/backend/repository"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"golang.org/x/sync/singleflight"
 )
 
-var isCached atomic.Bool
-var requestGroup singleflight.Group
-var allowCache time.Time
-var ErrDB = errors.New("DB Error")
-
-func randomBool() bool {
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	return r.Intn(2) == 1
-}
-
-func simulateQueryDB(apiKey string) (string, error) {
-	slog.Info(">>> DO QUERY DB (SELECT) CHO KEY" + apiKey)
-	time.Sleep(100 * time.Microsecond)
-
-	if time.Now().After(allowCache) {
-		isCached.Store(true)
-	}
-
-	if randomBool() {
-		return "data", nil
-	}
-	return "", ErrDB
-}
-
 func Run() {
-	allowCache = time.Now().Add(15 * time.Second)
 	ratelimiter := ratelimiter.NewSimpleRatelimiter()
+	repo := repository.NewModelRepository()
 
 	router := gin.Default()
 	router.Use(middleware.RateLimit(ratelimiter))
@@ -80,30 +51,17 @@ func Run() {
 	router.GET("/v1/auth", func(ctx *gin.Context) {
 		apiKey := ctx.GetHeader("X-Api-Key")
 
-		// Cache Miss
-		if !isCached.Load() {
-			val, err, shared := requestGroup.Do(apiKey, func() (any, error) {
-				return simulateQueryDB(apiKey)
+		val, err := repo.SimulateQueryDB(apiKey)
+		if err != nil {
+			ctx.JSON(http.StatusInternalServerError, gin.H{
+				"message": err.Error(),
 			})
-			if err != nil {
-				ctx.JSON(500, gin.H{"message": "DB error"})
-				return
-			}
-
-			if shared {
-				ctx.JSON(200, gin.H{
-					"message": fmt.Sprintf("reuse query db: %v", val),
-				})
-			} else {
-				ctx.JSON(200, gin.H{
-					"message": fmt.Sprintf("query db: %v", val),
-				})
-			}
-		} else {
-			ctx.JSON(200, gin.H{
-				"message": "cache hit",
-			})
+			return
 		}
+
+		ctx.JSON(http.StatusOK, gin.H{
+			"message": val,
+		})
 	})
 
 	router.Run("localhost:8080")
