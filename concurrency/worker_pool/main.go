@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	_ "embed"
+	"errors"
 	"log"
 	"log/slog"
 	"runtime"
@@ -46,7 +47,7 @@ func (wp *WorkerPool) StreamJobFromEmbedded(data string) error {
 }
 
 func (wp *WorkerPool) SpawnWorkers() {
-	for i := 0; i < wp.numWorkers; i++ {
+	for i := range wp.numWorkers {
 		wp.wg.Add(1)
 		go func(id int) {
 			defer wp.wg.Done()
@@ -73,6 +74,10 @@ func (wp *WorkerPool) CollectResult() {
 }
 
 func processRecord(workerID int, record string) error {
+	if record == "" {
+		return errors.New("record is empty")
+	}
+
 	slog.Info("Worker read", "worker_id", workerID, "record", record)
 	time.Sleep(1 * time.Millisecond)
 	return nil
