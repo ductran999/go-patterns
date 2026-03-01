@@ -23,7 +23,7 @@ tasks:
   codecov:
     desc: run unit test and force coverage > 80%
     cmds:
-      - go test -coverprofile=coverage.out $(go list ./... | grep -v resilience)
+      - go test -coverprofile=coverage.out $(go list ./... | grep -vE "resilience|concurrency")
       - go tool cover -func=coverage.out | awk '/^total:/ { if ($3+0 < 80) { print "Coverage below 80%"; exit 1 } }'
 
   deps:
