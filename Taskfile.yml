@@ -30,3 +30,11 @@ tasks:
     desc: install dependencies
     cmds:
       - go install github.com/vektra/mockery/v3@v3.6.4
+
+  check:
+    desc: check precommit
+    cmds:
+      - go fmt ./...
+      - go vet ./...
+      - golangci-lint run --timeout 5m --config .golangci.yml
+    silent: true

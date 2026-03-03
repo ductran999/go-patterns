@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"sync"
 )
 
@@ -24,15 +24,12 @@ func main() {
 	salutations := []string{"hello", "greetings", "good day"}
 
 	for _, salutation := range salutations {
-		wg.Add(1)
-
-		// MODERN APPROACH (Go 1.22+)
+		// MODERN APPROACH (Go 1.25+)
 		// No manual parameter passing required. Each goroutine captures
 		// its own unique 'salutation' instance.
-		go func() {
-			defer wg.Done()
-			fmt.Println(salutation)
-		}()
+		wg.Go(func() {
+			log.Println(salutation)
+		})
 		//
 		// LEGACY APPROACH (Pre-Go 1.22):
 		// To achieve the same result in older versions, you had to pass the
