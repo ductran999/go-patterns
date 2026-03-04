@@ -18,9 +18,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: task-check
-        name: Run task check before push
-        entry: task check
+      - id: check governance
+        name: Run task check governance before push
+        entry: task governance
         language: system
         pass_filenames: false
         stages: [pre-push]
