@@ -3,6 +3,7 @@ module patterns
 go 1.25.1
 
 require (
+	github.com/cenkalti/backoff/v4 v4.3.0
 	github.com/ductran999/letobserv v0.0.0-20260204154440-b8b1fed26a60
 	github.com/gin-gonic/gin v1.11.0
 	github.com/sony/gobreaker v1.0.0
