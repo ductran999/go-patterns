@@ -19,6 +19,10 @@ The repository is organized into the following directories:
 
 - `creational/`: Contains examples of creational design patterns like Factory, Singleton, and Builder.
 
+- `concurrency/`: Demonstrates advanced concurrency patterns such as Worker Pools, Pipelines, and Fan-in/Fan-out for efficient task orchestration.
+
+- `resilience/`: Features fault-tolerance patterns including Circuit Breaker, Retry, and Bulkhead to ensure system stability and graceful degradation.
+
 ## Prerequisites
 
 Ensure the following tools are installed on your machine:

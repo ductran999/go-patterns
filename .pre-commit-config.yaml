@@ -5,16 +5,19 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
       - id: trailing-whitespace
+        verbose: true
 
   - repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:
       - id: black
+        verbose: true
 
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.18.2
     hooks:
       - id: gitleaks
+        verbose: true
 
   - repo: local
     hooks:
@@ -24,3 +27,4 @@ repos:
         language: system
         pass_filenames: false
         stages: [pre-push]
+        verbose: true
