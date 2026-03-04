@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"log/slog"
 	"net/http"
 	"patterns/resilience/backend/pkg/ratelimiter"
 
@@ -14,7 +15,8 @@ func RateLimit(r ratelimiter.Ratelimiter) gin.HandlerFunc {
 		if !r.Allow() {
 			c.Status(http.StatusTooManyRequests)
 			c.Writer.Header().Set("Content-Type", "application/json")
-			c.Writer.Write(tooManyRequestsBody)
+			_, err := c.Writer.Write(tooManyRequestsBody)
+			slog.Error("write request body error", "message", err.Error())
 
 			c.Abort()
 			return

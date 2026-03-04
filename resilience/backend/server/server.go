@@ -1,6 +1,8 @@
 package server
 
 import (
+	"errors"
+	"log"
 	"net/http"
 	"patterns/resilience/backend/middleware"
 	"patterns/resilience/backend/pkg/ratelimiter"
@@ -64,5 +66,7 @@ func Run() {
 		})
 	})
 
-	router.Run("localhost:8080")
+	if err := router.Run("localhost:8080"); err != nil && errors.Is(err, http.ErrServerClosed) {
+		log.Fatalln("run server error", err)
+	}
 }
