@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/DucTran999/go-patterns/graph/badge.svg?token=5XBMMBKCPD)](https://codecov.io/gh/DucTran999/go-patterns)
 [![License](https://img.shields.io/github/license/DucTran999/go-patterns)](LICENSE)
 
-A personal collection of patterns, concurrency models, and load balancing techniques explored while learning Go.
+This repository serves as a comprehensive collection of design patterns and best practices in Go, covering a wide range of topics including concurrency, behavioral patterns, creational patterns, and resilience strategies. Each pattern is implemented with clear examples and explanations to help developers understand when and how to use them effectively in their Go projects.
 
 ---
 
@@ -13,17 +13,21 @@ A personal collection of patterns, concurrency models, and load balancing techni
 
 The repository is organized into the following directories:
 
-- `concurrency/`: Illustrates Go's concurrency primitives, including goroutines, channels, and synchronization patterns.
+- `structural/`: Illustrates Go's structural patterns, including Adapter, Decorator, and Composite.
 
 - `behavioral/`: Implements common behavioral design patterns such as Strategy, Bridge, and Command.
 
 - `creational/`: Contains examples of creational design patterns like Factory, Singleton, and Builder.
 
+- `concurrency/`: Demonstrates advanced concurrency patterns such as Worker Pools, Pipelines, and Fan-in/Fan-out for efficient task orchestration.
+
+- `resilience/`: Features fault-tolerance patterns including Circuit Breaker, Retry, and Bulkhead to ensure system stability and graceful degradation.
+
 ## Prerequisites
 
 Ensure the following tools are installed on your machine:
 
-- [**Go 1.23+**](https://go.dev/dl/) — The project requires Go version 1.23 or later.
+- [**Go 1.25+**](https://go.dev/dl/) — The project requires Go version 1.25 or later.
 - [**Taskfile CLI**](https://taskfile.dev/) — Used for task automation and scripting.
 
 ---
@@ -33,7 +37,7 @@ Ensure the following tools are installed on your machine:
 Clone the repository:
 
 ```bash
-git clone https://github.com/DucTran999/go-patterns.git
+git clone https://github.com/ductran999/go-patterns.git
 cd go-patterns
 ```
 
