@@ -16,6 +16,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/ductran999/letobserv v0.0.0-20260204154440-b8b1fed26a60 h1:XeQkVj58BsfCPF9Q/F8f2uRtRb/eoXGABCtVqrXwsTk=
 github.com/ductran999/letobserv v0.0.0-20260204154440-b8b1fed26a60/go.mod h1:VYCs/dRr/AXv31PQk+A0wv63PWXAoeYPcUIwLtCdAYk=
+github.com/ductran999/shared-pkg v0.0.0-20251104162235-a365d8b4a212 h1:zfbizsqOh4fpCfI/9vb84N0TvhUfIbyrdxAbDnqb568=
+github.com/ductran999/shared-pkg v0.0.0-20251104162235-a365d8b4a212/go.mod h1:SLqziggG7blBoj83vkz5OIqEMmv9V8UevdxB3oJyYb0=
 github.com/felixge/httpsnoop v1.0.4 h1:NFTV2Zj1bL4mc9sqWACXbQFVBBg2W3GPvqp8/ESS2Wg=
 github.com/felixge/httpsnoop v1.0.4/go.mod h1:m8KPJKqk1gH5J9DgRY2ASl2lWCfGKXixSwevea8zH2U=
 github.com/gabriel-vasile/mimetype v1.4.11 h1:AQvxbp830wPhHTqc1u7nzoLT+ZFxGY7emj5DR5DYFik=

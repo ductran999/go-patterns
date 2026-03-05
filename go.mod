@@ -5,6 +5,7 @@ go 1.25.1
 require (
 	github.com/cenkalti/backoff/v4 v4.3.0
 	github.com/ductran999/letobserv v0.0.0-20260204154440-b8b1fed26a60
+	github.com/ductran999/shared-pkg v0.0.0-20251104162235-a365d8b4a212
 	github.com/gin-gonic/gin v1.11.0
 	github.com/sony/gobreaker v1.0.0
 	github.com/stretchr/testify v1.11.1
