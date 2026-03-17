@@ -20,11 +20,11 @@ sequenceDiagram
 
     Client->>App: 1. Request Data
     App->>Cache: 2. Check for Data
-    
+
     alt Cache Hit (Data Exists)
         Cache-->>App: 3a. Return Data
         App-->>Client: 4a. Return Data to Client
-        
+
     else Cache Miss (Data Not Found)
         Cache-->>App: 3b. Null / Not Found
         App->>DB: 4b. Query Data from Database

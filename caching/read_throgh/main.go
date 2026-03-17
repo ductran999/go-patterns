@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// 1. Database (The Source of Truth)
 type Database struct {
 	data map[string]string
 }
@@ -17,7 +16,6 @@ func (db *Database) Fetch(key string) string {
 	return db.data[key]
 }
 
-// 2. ReadThroughCache (The logic is INSIDE the cache)
 type ReadThroughCache struct {
 	mu      sync.RWMutex
 	storage map[string]string
