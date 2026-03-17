@@ -23,6 +23,8 @@ The repository is organized into the following directories:
 
 - `resilience/`: Features fault-tolerance patterns including Circuit Breaker, Retry, and Bulkhead to ensure system stability and graceful degradation.
 
+- `caching/`:  Examples of caching strategies, including Write-Back (Write-Behind), Cache-Aside patterns, etc. for optimizing data access and performance.
+
 ## Prerequisites
 
 Ensure the following tools are installed on your machine:
