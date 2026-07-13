@@ -1,6 +1,6 @@
 package gravitino
 
-import "fmt"
+import "log"
 
 type Client interface {
 	WithTarget(baseURL, token string) TargetAPI
@@ -10,10 +10,6 @@ type clientImpl struct{}
 
 func NewClient() Client {
 	return &clientImpl{}
-}
-
-func (c *clientImpl) doRequest(path string) {
-	fmt.Printf("[HTTP CALL] Executing request to: %s\n", path)
 }
 
 func (c *clientImpl) WithTarget(baseURL, token string) TargetAPI {
@@ -28,4 +24,8 @@ type targetImpl struct {
 	client  *clientImpl
 	baseURL string
 	token   string
+}
+
+func (c *clientImpl) doRequest(path string) {
+	log.Println("[HTTP CALL] Executing request to: ", path)
 }

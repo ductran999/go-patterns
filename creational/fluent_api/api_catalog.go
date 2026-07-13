@@ -1,12 +1,11 @@
 package gravitino
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
-type CatalogAction interface {
-	Get()
-	Delete()
-	Create()
-}
+type CatalogAction = MetalakeAction
 
 type MetalakeScope interface {
 	Catalogs() CatalogAction
@@ -39,15 +38,15 @@ func (c *catalogActionImpl) Get() {
 	metalakeName := c.metalakeScope.name
 
 	path := fmt.Sprintf("%s/api/metalakes/%s/catalogs", baseURL, metalakeName)
-	fmt.Printf("-> Getting all catalogs for metalake '%s'...\n", metalakeName)
+	log.Println("-> Getting all catalogs for metalake", metalakeName)
 
 	c.metalakeScope.target.client.doRequest(path)
 }
 
 func (c *catalogActionImpl) Create() {
-	fmt.Printf("-> Creating a catalog in metalake '%s'...\n", c.metalakeScope.name)
+	log.Println("-> Creating a catalog in metalake", c.metalakeScope.name)
 }
 
 func (c *catalogActionImpl) Delete() {
-	fmt.Printf("-> Deleting a catalog in metalake '%s'...\n", c.metalakeScope.name)
+	log.Println("-> Deleting a catalog in metalake", c.metalakeScope.name)
 }

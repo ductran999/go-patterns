@@ -1,7 +1,7 @@
 package gravitino
 
 import (
-	"fmt"
+	"log"
 )
 
 type TargetAPI interface {
@@ -26,15 +26,15 @@ type metalakeActionImpl struct {
 }
 
 func (m *metalakeActionImpl) Get() {
-	path := fmt.Sprintf("%s/api/metalakes", m.target.baseURL)
-	fmt.Println("-> Getting all metalakes...")
+	path := m.target.baseURL + "/api/metalakes"
+	log.Println("-> Getting all metalakes...")
 	m.target.client.doRequest(path)
 }
 
 func (m *metalakeActionImpl) Create() {
-	fmt.Println("-> Creating a metalake...")
+	log.Println("-> Creating a metalake...")
 }
 
 func (m *metalakeActionImpl) Delete() {
-	fmt.Println("-> Deleting a metalake...")
+	log.Println("-> Deleting a metalake...")
 }
