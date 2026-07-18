@@ -1,6 +1,5 @@
 # GO Patterns
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/DucTran999/go-patterns)](https://goreportcard.com/report/github.com/DucTran999/go-patterns)
 [![Go](https://img.shields.io/badge/Go-1.24.5-blue?logo=go)](https://golang.org)
 [![codecov](https://codecov.io/gh/DucTran999/go-patterns/graph/badge.svg?token=5XBMMBKCPD)](https://codecov.io/gh/DucTran999/go-patterns)
 [![License](https://img.shields.io/github/license/DucTran999/go-patterns)](LICENSE)
@@ -23,7 +22,7 @@ The repository is organized into the following directories:
 
 - `resilience/`: Features fault-tolerance patterns including Circuit Breaker, Retry, and Bulkhead to ensure system stability and graceful degradation.
 
-- `caching/`:  Examples of caching strategies, including Write-Back (Write-Behind), Cache-Aside patterns, etc. for optimizing data access and performance.
+- `caching/`: Examples of caching strategies, including Write-Back (Write-Behind), Cache-Aside patterns, etc. for optimizing data access and performance.
 
 ## Prerequisites
 
